@@ -1,0 +1,6 @@
+{
+  "name": "NATIONAL MASTERSTROKE PORTAL",
+  "description": "A satirical 90s government portal parody featuring opposition-vision report cards, glitched promise meters, bureaucratic error traps, and absurd approval workflows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

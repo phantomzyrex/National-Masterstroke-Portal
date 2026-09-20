@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@layer utilities {
+  /* 90s Windows 95 Button & Inset Borders */
+  .win95-box {
+    background-color: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    box-shadow: inset -1px -1px #808080, inset 1px 1px #dfdfdf;
+  }
+
+  .win95-box-inset {
+    background-color: #ffffff;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    box-shadow: inset 1px 1px #000000;
+  }
+
+  .win95-btn {
+    background-color: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    box-shadow: inset -1px -1px #808080, inset 1px 1px #dfdfdf;
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .win95-btn:active {
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    box-shadow: inset 1px 1px #808080;
+    padding-top: 1px;
+    padding-left: 1px;
+  }
+
+  /* Retro blinking */
+  .blink-fast {
+    animation: blink 0.5s step-start infinite;
+  }
+
+  .blink-slow {
+    animation: blink 1s step-start infinite;
+  }
+
+  /* Hazard stripes */
+  .hazard-stripes {
+    background: repeating-linear-gradient(
+      -45deg,
+      #000,
+      #000 12px,
+      #ffd700 12px,
+      #ffd700 24px
+    );
+  }
+
+  .hazard-stripes-orange {
+    background: repeating-linear-gradient(
+      -45deg,
+      #000,
+      #000 12px,
+      #ff5500 12px,
+      #ff5500 24px
+    );
+  }
+
+  /* Glitch animation */
+  .glitch-text {
+    text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 90s Marquee Animation */
+@keyframes marquee-infinite {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee-infinite 30s linear infinite;
+}
+
+.animate-marquee-text:hover {
+  animation-play-state: paused;
+}
+
+/* Retro CRT scanline effect (subtle) */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.06),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.06)
+  );
+  background-size: 100% 4px, 6px 100%;
+}
+
