@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { RETRO_TICKERS } from '../data/parodyData';
-import { Volume2, VolumeX, AlertTriangle, ShieldCheck, Flame } from 'lucide-react';
+import { Volume2, VolumeX, AlertTriangle, ShieldCheck, Flame, Radio, Disc3 } from 'lucide-react';
 import { toggleMute, isMuted, playDing } from '../utils/audio';
+import { nightmareAnthem } from '../utils/nightmareAnthem';
 
 interface HeaderMarqueeProps {
   onGlitchTrigger: () => void;
   glitchCount: number;
+  onOpenAnthemPlayer?: () => void;
 }
 
-export const HeaderMarquee: React.FC<HeaderMarqueeProps> = ({ onGlitchTrigger, glitchCount }) => {
+export const HeaderMarquee: React.FC<HeaderMarqueeProps> = ({ onGlitchTrigger, glitchCount, onOpenAnthemPlayer }) => {
   const [tickerIndex, setTickerIndex] = useState(0);
   const [muted, setMuted] = useState(isMuted());
   const [timeString, setTimeString] = useState('');
   const [visitorCount, setVisitorCount] = useState(420786);
+  const [isAnthemPlaying, setIsAnthemPlaying] = useState(false);
+
+  useEffect(() => {
+    const unsub = nightmareAnthem.subscribe((state) => {
+      setIsAnthemPlaying(state.isPlaying);
+    });
+    return () => unsub();
+  }, []);
 
   useEffect(() => {
     // Ticker rotation
@@ -76,13 +86,21 @@ export const HeaderMarquee: React.FC<HeaderMarqueeProps> = ({ onGlitchTrigger, g
           
           {/* Logo & Emblems */}
           <div className="flex items-center space-x-3 sm:space-x-4">
-            {/* Parody Emblem */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-b from-yellow-300 via-orange-400 to-yellow-600 rounded-full border-4 border-yellow-200 flex flex-col items-center justify-center p-1 shadow-2xl relative shrink-0">
+            {/* Parody Emblem with Secret 8-Bit Anthem Trigger */}
+            <div 
+              onClick={() => {
+                nightmareAnthem.toggle();
+                if (onOpenAnthemPlayer) onOpenAnthemPlayer();
+              }}
+              className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-b from-yellow-300 via-orange-400 to-yellow-600 rounded-full border-4 border-yellow-200 flex flex-col items-center justify-center p-1 shadow-2xl relative shrink-0 cursor-pointer hover:scale-105 active:scale-95 transition-transform group"
+              title="SECRET AUDIO: Click emblem to toggle 8-bit nightmarish patriotic anthem!"
+            >
               <div className="text-[10px] font-black text-blue-900 uppercase tracking-tighter">सत्यमेव</div>
               <div className="text-xl sm:text-2xl">☕</div>
               <div className="text-[9px] font-bold text-red-900 tracking-tighter">JUMLA JAYATE</div>
-              <div className="absolute -bottom-2 bg-red-600 text-yellow-100 text-[8px] font-black px-1.5 border border-white">
-                56-INCH
+              <div className="absolute -bottom-2 bg-red-600 text-yellow-100 text-[8px] font-black px-1.5 border border-white flex items-center gap-1">
+                {isAnthemPlaying ? <span className="animate-spin">💿</span> : null}
+                <span>56-INCH</span>
               </div>
             </div>
 
@@ -107,15 +125,33 @@ export const HeaderMarquee: React.FC<HeaderMarqueeProps> = ({ onGlitchTrigger, g
           {/* 90s Gadgets Box: Sound, Clock, Hit Counter */}
           <div className="flex flex-wrap items-center justify-center lg:justify-end gap-2 sm:gap-3 text-xs">
             
-            {/* Audio Toggle */}
+            {/* Sound Effects Audio Toggle */}
             <button
               id="sound-toggle-btn"
               onClick={handleAudioToggle}
-              className="win95-btn px-2.5 py-1.5 flex items-center space-x-1 text-black bg-[#c0c0c0] hover:bg-yellow-200 transition-colors"
-              title="Toggle retro Windows SoundBlaster 16 Audio"
+              className="win95-btn px-2 py-1.5 flex items-center space-x-1 text-black bg-[#c0c0c0] hover:bg-yellow-200 transition-colors"
+              title="Toggle retro Windows SoundBlaster 16 SFX"
             >
-              {muted ? <VolumeX className="w-4 h-4 text-red-600" /> : <Volume2 className="w-4 h-4 text-green-700 animate-pulse" />}
-              <span className="text-[11px]">AUDIO: {muted ? 'OFF' : 'ON'}</span>
+              {muted ? <VolumeX className="w-3.5 h-3.5 text-red-600" /> : <Volume2 className="w-3.5 h-3.5 text-green-700 animate-pulse" />}
+              <span className="text-[10px]">SFX: {muted ? 'OFF' : 'ON'}</span>
+            </button>
+
+            {/* Hidden / Secret 8-Bit Anthem Trigger */}
+            <button
+              id="secret-anthem-header-btn"
+              onClick={() => {
+                nightmareAnthem.toggle();
+                if (onOpenAnthemPlayer) onOpenAnthemPlayer();
+              }}
+              className={`win95-btn px-2 py-1.5 flex items-center space-x-1 font-black text-[10px] transition-all border ${
+                isAnthemPlaying
+                  ? 'bg-red-800 text-yellow-300 border-yellow-300 animate-pulse'
+                  : 'bg-[#d0d0d0] hover:bg-yellow-100 text-black border-gray-600'
+              }`}
+              title="Hidden 8-Bit Low-Quality Patriotic Anthem MIDI Player"
+            >
+              <Radio className={`w-3.5 h-3.5 ${isAnthemPlaying ? 'text-yellow-300 animate-bounce' : 'text-blue-900'}`} />
+              <span>{isAnthemPlaying ? '🔴 8-BIT ANTHEM (ON)' : '8-BIT ANTHEM [MID]'}</span>
             </button>
 
             {/* Bureaucratic Clock */}

@@ -6,6 +6,7 @@ import { AbsurdWorkflowSimulator } from './components/AbsurdWorkflowSimulator';
 import { BrokenLinksTrapSection } from './components/BrokenLinksTrapSection';
 import { RetroDialogModal } from './components/RetroDialogModal';
 import { FooterCredits } from './components/FooterCredits';
+import { HiddenAnthemPlayer } from './components/HiddenAnthemPlayer';
 import { ErrorModalData } from './types';
 import { playDing, playErrorBuzz, playDialupScreech } from './utils/audio';
 import { EyeOff, AlertOctagon, RefreshCw, FileSpreadsheet } from 'lucide-react';
@@ -161,6 +162,22 @@ export default function App() {
       <RetroDialogModal 
         modalData={modalData}
         onClose={handleCloseModal}
+      />
+
+      {/* Hidden 8-Bit Nightmarish Patriotic Anthem Player */}
+      <HiddenAnthemPlayer 
+        onOpenErrorModal={(title, message) => {
+          handleOpenErrorModal({
+            isOpen: true,
+            title,
+            code: 'SOUNDBLASTER-MIDI-DEMONIC-66A',
+            gazetteRef: 'NIC AUDITORY SANCTITY CIRCULAR 1998',
+            message,
+            babuRemarks: 'Babu directive: Maintain 100% standing posture while listening to 8-bit chip audio.',
+            actionText: 'Salute 8-Bit Chiptune',
+            severity: 'critical'
+          });
+        }}
       />
 
       {/* Floating 90s Panic Button (Bottom Right) */}
