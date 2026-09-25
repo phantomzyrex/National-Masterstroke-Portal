@@ -25,14 +25,14 @@ export const RetroDialogModal: React.FC<RetroDialogModalProps> = ({ modalData, o
         <div className={`px-2 py-1.5 flex items-center justify-between text-white font-bold text-xs sm:text-sm ${
           modalData.severity === 'critical' 
             ? 'bg-gradient-to-r from-red-800 via-red-700 to-red-900'
-            : modalData.severity === 'washing_machine'
+            : modalData.severity === 'washing_machine' || modalData.severity === 'success'
             ? 'bg-gradient-to-r from-green-800 via-emerald-700 to-green-900'
             : 'bg-gradient-to-r from-[#000080] via-[#0000aa] to-[#000080]'
         }`}>
           <div className="flex items-center space-x-1.5 truncate">
             {modalData.severity === 'critical' ? (
               <ShieldAlert className="w-4 h-4 text-yellow-300 shrink-0" />
-            ) : modalData.severity === 'washing_machine' ? (
+            ) : modalData.severity === 'washing_machine' || modalData.severity === 'success' ? (
               <Sparkles className="w-4 h-4 text-yellow-200 shrink-0" />
             ) : (
               <AlertTriangle className="w-4 h-4 text-yellow-300 shrink-0" />

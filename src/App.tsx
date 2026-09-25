@@ -7,6 +7,10 @@ import { BrokenLinksTrapSection } from './components/BrokenLinksTrapSection';
 import { RetroDialogModal } from './components/RetroDialogModal';
 import { FooterCredits } from './components/FooterCredits';
 import { HiddenAnthemPlayer } from './components/HiddenAnthemPlayer';
+import { ModiInteractiveAvatar } from './components/ModiInteractiveAvatar';
+import { InaugurationOverlay } from './components/InaugurationOverlay';
+import { VikasReceiptPrinter } from './components/VikasReceiptPrinter';
+import { RtiFilingPortal } from './components/RtiFilingPortal';
 import { ErrorModalData } from './types';
 import { playDing, playErrorBuzz, playDialupScreech } from './utils/audio';
 import { EyeOff, AlertOctagon, RefreshCw, FileSpreadsheet } from 'lucide-react';
@@ -125,6 +129,23 @@ export default function App() {
         </div>
       ) : null}
 
+      {/* Interactive Virtual Inauguration Ribbon & Digital India Confetti Shower */}
+      <InaugurationOverlay 
+        onInaugurated={() => {
+          handleOpenErrorModal({
+            isOpen: true,
+            title: 'CEREMONIAL INAUGURATION SANCTIONED: TENDER EXPENSE PASSED',
+            code: 'NIC-INAUG-PHASE-14-CEREMONY',
+            gazetteRef: 'NATIONAL PROTOCOL FOR VIRTUAL RIBBON CUTTING VIA FIBER OPTIC CABLE 2026',
+            message: 'Congratulations! You have officially cut the ceremonial silk ribbon on the National Masterstroke Portal. A symbolic grant of ₹42,069 Crores has been allocated for tea, samosas, and 48-page full-color supplement spreads in tomorrow\'s newspapers.',
+            babuRemarks: 'Babu Directive: Ribbon pieces collected for recycling in Phase 15 Re-Inauguration next month.',
+            actionText: 'Stand at Attention & Collect Samosa',
+            secondaryActionText: 'Salute 56-Inch Digital Bandwidth',
+            severity: 'success'
+          });
+        }}
+      />
+
       {/* Retro 90s Header Marquee */}
       <HeaderMarquee 
         onGlitchTrigger={() => setGlitchCount((c) => c + 1)}
@@ -145,6 +166,14 @@ export default function App() {
 
         {/* Absurd Workflow Simulator: 15 Lakh Form + Political Washing Machine + Gazette Circulars */}
         <AbsurdWorkflowSimulator 
+          onTriggerErrorModal={handleOpenErrorModal}
+        />
+
+        {/* 90s Thermal POS Vikas Receipt Printer: Itemized Imaginary Spending */}
+        <VikasReceiptPrinter />
+
+        {/* File an RTI Form with Dodging Submit Button & Digital Bribe Speed Money */}
+        <RtiFilingPortal 
           onTriggerErrorModal={handleOpenErrorModal}
         />
 
@@ -179,6 +208,9 @@ export default function App() {
           });
         }}
       />
+
+      {/* Interactive 2D Modi Avatar Companion with Real-Time Dialogue & Mood Expressions */}
+      <ModiInteractiveAvatar />
 
       {/* Floating 90s Panic Button (Bottom Right) */}
       <div className="fixed bottom-3 right-3 z-40">

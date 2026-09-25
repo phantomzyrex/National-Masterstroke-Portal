@@ -21,7 +21,7 @@ export interface ErrorModalData {
   babuRemarks: string;
   actionText: string;
   secondaryActionText?: string;
-  severity: 'warning' | 'critical' | 'gazette' | 'washing_machine';
+  severity: 'warning' | 'critical' | 'gazette' | 'washing_machine' | 'success';
 }
 
 export interface HyperlinkTrap {

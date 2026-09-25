@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RETRO_TICKERS } from '../data/parodyData';
-import { Volume2, VolumeX, AlertTriangle, ShieldCheck, Flame, Radio, Disc3 } from 'lucide-react';
+import { Volume2, VolumeX, AlertTriangle, ShieldCheck, Flame, Radio, Disc3, Printer, FileText } from 'lucide-react';
 import { toggleMute, isMuted, playDing } from '../utils/audio';
 import { nightmareAnthem } from '../utils/nightmareAnthem';
 
@@ -104,6 +104,26 @@ export const HeaderMarquee: React.FC<HeaderMarqueeProps> = ({ onGlitchTrigger, g
               </div>
             </div>
 
+            {/* Realistic 2D Modi Header Avatar */}
+            <div 
+              onClick={() => {
+                const consoleBtn = document.getElementById('modi-avatar-mascot-btn');
+                if (consoleBtn) consoleBtn.click();
+              }}
+              className="hidden sm:flex relative w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-orange-500 overflow-hidden shadow-xl shrink-0 cursor-pointer hover:scale-105 active:scale-95 transition-transform bg-gradient-to-b from-orange-400 to-amber-600 group"
+              title="Click 2D Modi Avatar to open interactive Q&A!"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/5/5f/The_official_portrait_of_Shri_Narendra_Modi%2C_the_Prime_Minister_of_the_Republic_of_India.jpg"
+                alt="2D Modi Avatar"
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform"
+              />
+              <div className="absolute bottom-0 inset-x-0 bg-yellow-400 text-black text-[7px] font-black text-center uppercase tracking-tighter">
+                2D AVATAR
+              </div>
+            </div>
+
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="bg-yellow-400 text-black text-[10px] sm:text-xs font-black px-2 py-0.2 border border-black uppercase tracking-wider">
@@ -152,6 +172,34 @@ export const HeaderMarquee: React.FC<HeaderMarqueeProps> = ({ onGlitchTrigger, g
             >
               <Radio className={`w-3.5 h-3.5 ${isAnthemPlaying ? 'text-yellow-300 animate-bounce' : 'text-blue-900'}`} />
               <span>{isAnthemPlaying ? '🔴 8-BIT ANTHEM (ON)' : '8-BIT ANTHEM [MID]'}</span>
+            </button>
+
+            {/* Vikas Receipt Printer Quick Jump Button */}
+            <button
+              id="header-vikas-receipt-btn"
+              onClick={() => {
+                playDing();
+                document.getElementById('vikas-receipt-printer-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="win95-btn px-2 py-1.5 flex items-center space-x-1 font-black text-[10px] bg-yellow-400 hover:bg-yellow-300 text-black border border-black shadow-xs cursor-pointer"
+              title="Audit imaginary government spending receipt"
+            >
+              <Printer className="w-3.5 h-3.5 text-red-900" />
+              <span>VIKAS RECEIPT [POS]</span>
+            </button>
+
+            {/* RTI Portal Quick Jump Button */}
+            <button
+              id="header-rti-portal-btn"
+              onClick={() => {
+                playDing();
+                document.getElementById('rti-filing-portal-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="win95-btn px-2 py-1.5 flex items-center space-x-1 font-black text-[10px] bg-red-700 hover:bg-red-600 text-yellow-200 border border-black shadow-xs cursor-pointer"
+              title="File RTI with fleeing submit button & digital speed bribe"
+            >
+              <FileText className="w-3.5 h-3.5 text-yellow-300" />
+              <span>FILE RTI [BRIBE-GATE]</span>
             </button>
 
             {/* Bureaucratic Clock */}

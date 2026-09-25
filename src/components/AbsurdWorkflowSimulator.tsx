@@ -20,6 +20,13 @@ interface AbsurdWorkflowSimulatorProps {
   onTriggerErrorModal: (modalData: ErrorModalData) => void;
 }
 
+const MODI_FORM_TIPS = [
+  "Mitron! Remember that ₹15,00,000 is not a mere currency note, it is an emotion. Feel it in your 56-inch chest measurement!",
+  "Bhaiyo aur Behno! Before clicking submit, did you inspect whether your biometric iris is smiling in saffron mode?",
+  "Notice to Taxpayer: 99.8% of citizens who claimed ₹15 Lakh voluntarily redirected it to fund daily full-page newspaper advertisements!",
+  "Can your bank server handle this much digital liquidity? Our teleprompter recommends drinking chai first!"
+];
+
 export const AbsurdWorkflowSimulator: React.FC<AbsurdWorkflowSimulatorProps> = ({ onTriggerErrorModal }) => {
   // 15 Lakh Form States
   const [applicantName, setApplicantName] = useState('');
@@ -29,6 +36,7 @@ export const AbsurdWorkflowSimulator: React.FC<AbsurdWorkflowSimulatorProps> = (
   const [selectedCaptcha, setSelectedCaptcha] = useState<number[]>([]);
   const [submitBtnOffset, setSubmitBtnOffset] = useState({ x: 0, y: 0 });
   const [dodgeCount, setDodgeCount] = useState(0);
+  const [modiTipIndex, setModiTipIndex] = useState(0);
 
   // Washing Machine States
   const [corruptLeader, setCorruptLeader] = useState('irrigation_scam');
@@ -160,6 +168,46 @@ export const AbsurdWorkflowSimulator: React.FC<AbsurdWorkflowSimulatorProps> = (
           <form onSubmit={handleClaimSubmit} className="p-3 sm:p-4 bg-[#dfdfdf] flex-1 flex flex-col justify-between text-xs text-black">
             
             <div className="space-y-3">
+              {/* 2D Modi Avatar Live Form Verifier */}
+              <div className="bg-gradient-to-r from-amber-100 to-yellow-100 border-2 border-orange-500 p-2 flex items-center space-x-3 rounded-none shadow-xs">
+                <div 
+                  onClick={() => {
+                    playDing();
+                    setModiTipIndex((prev) => (prev + 1) % MODI_FORM_TIPS.length);
+                  }}
+                  className="relative w-12 h-12 rounded-full border-2 border-black overflow-hidden shrink-0 cursor-pointer hover:scale-105 active:scale-95 transition-transform bg-orange-400"
+                  title="Click 2D Modi Avatar for instant verification tip!"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Official_Photograph_of_Prime_Minister_Narendra_Modi_Portrait_%28crop%29.png"
+                    alt="2D Modi Verifier"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <span className="absolute bottom-0 inset-x-0 bg-red-700 text-yellow-200 text-[6px] font-black text-center uppercase">
+                    VERIFIER
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between text-[10px] font-black text-red-800 uppercase">
+                    <span>2D PM AVATAR: LIVE AUDIT TIP</span>
+                    <button 
+                      type="button"
+                      onClick={() => {
+                        playDing();
+                        setModiTipIndex((prev) => (prev + 1) % MODI_FORM_TIPS.length);
+                      }}
+                      className="text-[9px] text-blue-800 underline hover:text-blue-950 font-bold"
+                    >
+                      [NEXT TIP]
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-black font-mono leading-tight mt-0.5">
+                    "{MODI_FORM_TIPS[modiTipIndex]}"
+                  </p>
+                </div>
+              </div>
+
               <div className="bg-yellow-100 border border-black p-2 text-[11px] text-red-950 font-bold">
                 NOTICE: Applying for this promised amount without prior written authorization from the PMO may result in immediate audit of your tea consumption expenses.
               </div>
@@ -358,6 +406,34 @@ export const AbsurdWorkflowSimulator: React.FC<AbsurdWorkflowSimulatorProps> = (
                     </div>
                   </div>
                 )}
+              </div>
+
+              {/* 2D Modi Avatar Clean Chit Endorsement */}
+              <div className="bg-gradient-to-r from-blue-100 to-indigo-100 border-2 border-blue-600 p-2 flex items-center space-x-3 rounded-none">
+                <div 
+                  onClick={() => playCleanChitJingle()}
+                  className="relative w-12 h-12 rounded-full border-2 border-blue-900 overflow-hidden shrink-0 cursor-pointer hover:scale-105 active:scale-95 transition-transform bg-amber-500"
+                  title="Click 2D Modi Avatar to hear Clean Chit fanfare!"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/b/be/Official_portrait_of_the_Prime_Minister_Narendra_Modi%2C_November_2020_%28cropped%29.jpg"
+                    alt="2D Modi Clean Chit Authority"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <span className="absolute bottom-0 inset-x-0 bg-blue-800 text-yellow-300 text-[6px] font-black text-center uppercase">
+                    ALLIANCE
+                  </span>
+                </div>
+                <div className="flex-1 text-[11px]">
+                  <div className="text-[10px] font-black text-blue-900 uppercase flex items-center justify-between">
+                    <span>2D PM AVATAR: CLEAN CHIT GUARANTEE</span>
+                    <span className="text-[9px] text-green-700 font-black">99.9% TIDE WHITE</span>
+                  </div>
+                  <p className="text-black font-mono leading-tight mt-0.5">
+                    "Accused leaders are merely raw diamonds waiting for our parliamentary spin cycle. Click to test!"
+                  </p>
+                </div>
               </div>
 
               {/* Action Button */}
